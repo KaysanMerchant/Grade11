@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<div class="home">
+  {{ content }}
+  <!-- TABLE OF CONTENTS -->
+  <h1>Table of Contents</h1>
+  <ul>
+    {% for post in paginator.posts %}
+      <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <span style="color:#777;"> — {{ post.date | date: "%B %d, %Y" }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- PAGINATION -->
+  <div class="pagination" style="margin-top: 2rem;">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; Newer Posts</a>
+    {% endif %}
+
+    {% if paginator.next_page %}
+      <a style="float:right;" href="{{ paginator.next_page_path | relative_url }}">Older Posts &raquo;</a>
+    {% endif %}
+  </div>
+
+</div>
