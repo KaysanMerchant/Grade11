@@ -1,0 +1,11 @@
+theme: jekyll-theme-minimal
+title: Kaysan Merchant
+
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+paginate: 5
+paginate_path: "/page:num/"
