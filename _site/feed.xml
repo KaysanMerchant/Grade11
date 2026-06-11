@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-06-11T15:33:32+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Kaysan Merchant</title><entry><title type="html">Intro to Computer Science Culminating Review</title><link href="http://localhost:4000/2026/06/11/ICS-Culminating-Reflection/" rel="alternate" type="text/html" title="Intro to Computer Science Culminating Review" /><published>2026-06-11T00:00:00+00:00</published><updated>2026-06-11T00:00:00+00:00</updated><id>http://localhost:4000/2026/06/11/ICS-Culminating-Reflection</id><content type="html" xml:base="http://localhost:4000/2026/06/11/ICS-Culminating-Reflection/"><![CDATA[<h1 id="overview">Overview</h1>
+
+<p>In this review, I cover topics about a game made in processing code by Rayan Bashir and myself, called Mom’s Backyard. The game is an RNG game where you mine underground, getting random ores that you can sell for money to buy upgrades. The ultimate goal of the game is to obtain a Tuntungtungsanite, which with base odds is a 1/17025 chance.</p>
+
+<p>I will be going over variables &amp; data tracking, selection structures, repitition structures, arrays &amp; data structures and use of custom functions &amp; error checking.</p>
+
+<h1 id="variables--data-tracking">Variables &amp; Data Tracking</h1>
+
+<p>To begin with, the variables used vary widely. The main variable types used are int, float and boolean, with some, but few strings. Of course, we include arrays of these types in various ways.</p>
+
+<h2 id="integer-variables">Integer Variables</h2>
+
+<p>Integer variables are used the most. They are used for upgrade levels, player data, ore weights, ore IDs, and couple of more functions. Integers were used for ore IDs because it was easily callable to be used in oreAnimations, invetories and for selling. For player data, it was used to be easily altered and used in actual modifiers for the game(e.g. making mineSpeed make the ore animation go faster as seen below).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">oreAnim</span><span class="p">){</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">pickY</span> <span class="o">&lt;=</span> <span class="mi">240</span><span class="p">){</span>
+        <span class="n">pickY</span> <span class="o">+=</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="n">pickX</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">delay</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="n">mineSpeed</span><span class="p">));</span>
+        
+      <span class="p">}</span>
+      <span class="n">imageMode</span><span class="p">(</span><span class="n">CENTER</span><span class="p">);</span>
+      <span class="n">image</span><span class="p">(</span><span class="n">glow</span><span class="p">,</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">oreY</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">);</span>
+      <span class="n">image</span><span class="p">(</span><span class="n">oreImages</span><span class="p">[</span><span class="n">currentOreID</span><span class="p">],</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">oreY</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">);</span>
+      <span class="n">imageMode</span><span class="p">(</span><span class="n">CORNER</span><span class="p">);</span>
+      <span class="n">image</span><span class="p">(</span><span class="n">rock</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+      <span class="n">oreY</span> <span class="o">-=</span> <span class="n">mineSpeed</span><span class="o">*</span><span class="mi">3</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">oreY</span> <span class="o">&lt;=</span> <span class="n">maxOreHeight</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">delay</span><span class="p">((</span><span class="nb">int</span><span class="p">)(</span><span class="mi">2000</span><span class="o">/</span><span class="n">mineSpeed</span><span class="p">));</span>
+          <span class="n">oreY</span> <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+          <span class="n">pickY</span> <span class="o">=</span> <span class="mi">175</span><span class="p">;</span>
+          <span class="n">pickX</span> <span class="o">=</span> <span class="mi">145</span><span class="p">;</span>
+          <span class="n">oreAnim</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+      <span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Kaysan Merchant</name></author><summary type="html"><![CDATA[Overview]]></summary></entry></feed>
