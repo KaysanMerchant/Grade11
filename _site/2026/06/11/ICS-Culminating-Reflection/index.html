@@ -24,7 +24,7 @@
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kaysan Merchant"},"dateModified":"2026-06-11T00:00:00+00:00","datePublished":"2026-06-11T00:00:00+00:00","description":"Overview","headline":"Intro to Computer Science Culminating Review","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2026/06/11/ICS-Culminating-Reflection/"},"url":"http://localhost:4000/2026/06/11/ICS-Culminating-Reflection/"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=55262b42e343e95e18ad127e5535e96db060a9dd">
+    <link rel="stylesheet" href="/assets/css/style.css?v=63db93640a988fe47949130c3427d6761f6cc619">
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
@@ -80,7 +80,7 @@
 
 <h2 id="integer-variables">Integer Variables</h2>
 
-<p>Integer variables are used the most. They are used for upgrade levels, player data, ore weights, ore IDs, and couple of more functions. Integers were used for ore IDs because it was easily callable to be used in oreAnimations, invetories and for selling. For player data, it was used to be easily altered and used in actual modifiers for the game(e.g. making mineSpeed make the ore animation go faster as seen below).</p>
+<p>Integer variables are used the most. They are used for upgrade levels, player data, ore weights, ore IDs, and couple of more functions. Integers were used for ore IDs because it was easily callable to be used in oreAnimations, invetories and for selling. For player data, it was used to be easily altered and used in actual modifiers for the game(e.g. making mineSpeed make the ore animation go faster as seen below). This way of using integers for tracking player data and ores was the easiest method we could think of, which is why we did not struggle with using it.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">oreAnim</span><span class="o">){</span>
       <span class="k">if</span> <span class="o">(</span><span class="n">pickY</span> <span class="o">&lt;=</span> <span class="mi">240</span><span class="o">){</span>
@@ -107,7 +107,7 @@
 
 <h1 id="selection-structure">Selection Structure</h1>
 
-<p>Selection structures were used in the code in various ways. One of the many ways we use it is to check game states. Very simply, we use selection structures like if statements to check if the game has started, if an ore animation has started, if thew shop is open and if the inventory is open. Below is how our sraw function is structured to check for these.</p>
+<p>Selection structures were used in the code in various ways. One of the many ways we use it is to check game states. Very simply, we use selection structures like if statements to check if the game has started, if an ore animation has started, if the shop is open and if the inventory is open. Below is how our draw function is structured to check for these.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">draw</span><span class="o">(){</span>
   <span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">){</span> <span class="c1">//if game not started(startmenu is true)</span>
@@ -170,11 +170,11 @@
 <p>Loop are used very often in our code. One of the best implementations of our code using loops is when we loop through all the ores in the inventory. For each ore, we draw a slot for the inventory with its own space. Every 5 ores, it moves on to the next line. The loop here simply goes through each ore in our ore table.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">25</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// if there ore is part of the first row</span>
       <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// if ore is part of second row</span>
       <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">+(</span><span class="mi">560</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="n">i</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// and so on</span>
       <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">+(</span><span class="mi">2</span><span class="o">*</span><span class="mi">560</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="n">i</span><span class="o">);</span>
     <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">+(</span><span class="mi">3</span><span class="o">*</span><span class="mi">560</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="n">i</span><span class="o">);</span>
@@ -193,6 +193,8 @@
     <span class="o">}</span>
  <span class="o">}</span>
 </code></pre></div></div>
+
+<p>None of the repitition structures posed an issue to us, due to the semester of experience we gained using structures like this.</p>
 
 <h1 id="arrays--data-structure">Arrays &amp; Data Structure</h1>
 
@@ -228,12 +230,91 @@
 
 <p>The second code snippet utilizes the weight of ores in an RNG system to determine what ore you get when you mine. Every time a new ore is cycled through, it pulls its weight from the table using <code class="language-plaintext highlighter-rouge">table.getInt(rowNum, column)</code>. It subtracts that from a randomly generated weight and one the randomly generated weight is less than or equal to 0, it takes the ore ID of the ore whose weight was subtracted last and uses both <code class="language-plaintext highlighter-rouge">table.setInt(rowNum, column, value)</code> and <code class="language-plaintext highlighter-rouge">table.getInt(rowNum, column)</code> to increase the quantity of that ore in the player invetory by one. It will also check if the ore has been found, using 1 as true and 0 as false.</p>
 
-<p>There are other ways to use tables, like using a function to get or set a string or a float instead of an integer, but our uses only required integers.</p>
+<p>There are other ways to use tables, like using a function to get or set a string or a float instead of an integer, but our uses only required integers. Due to this data structure being completely new to us, it required some time to get used to, as we only usually used arrays before this. The way I was able to wrap my head around using tables, was to think of it as a 2D array. You would have arrays for the columns, and arrays for each row, and they would cross over each other like a web. I believe using this made out game 10x easier to code, as without it, our code would abe a big jumbled up mess of arrays and text file decoding.</p>
 
 <p>Arrays are also used in our code, for loading pickaxe images and choosing the pickaxe image needed at any point.</p>
 
 <h1 id="use-of-custom-function--error-checkingrestrictions">Use of Custom Function &amp; Error Checking/Restrictions</h1>
 
+<p>Moving on to the final section, our use of custom functions &amp; error checking. One of the custom functions I wrote, that the whole game functions off of, is the function mineOre. This function esserntially is what makes our game a game. It randomly chooses an ore for the player to receive every time they mine.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">mineOre</span><span class="o">(){</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="o">(</span><span class="n">currentDepth</span><span class="o">+</span><span class="mi">1</span><span class="o">)*</span><span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="n">totalWeight</span> <span class="o">+=</span> <span class="n">oreTable</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"weight"</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="kt">float</span> <span class="n">weight</span> <span class="o">=</span> <span class="n">random</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">totalWeight</span><span class="o">+</span><span class="mi">1</span><span class="o">)/</span><span class="mf">1.00</span><span class="o">+(</span><span class="n">luckMultiplier</span><span class="o">*</span><span class="mf">0.05</span><span class="o">);</span>
+  <span class="n">totalWeight</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="n">currentDepth</span><span class="o">+</span><span class="mi">1</span><span class="o">)*</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--){</span>
+    <span class="n">weight</span> <span class="o">-=</span> <span class="n">oreTable</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"weight"</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">){</span>
+      <span class="n">oreInv</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"quantity"</span><span class="o">,</span> <span class="n">oreInv</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"quantity"</span><span class="o">)+</span><span class="mi">1</span><span class="o">);</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">oreInv</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"isFound"</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
+        <span class="n">oreInv</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"isFound"</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+      <span class="o">}</span>
+      <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The first thing that happens in the code is that the functions calculates the total weight of the ores available to a person at their depth upgrade. What I mean by weight is that each ore has a number attached to it that describes how often it shows up. For example, our rarest weight has a weight of 1, while dirt, the most common, has a weight of 3000. The greater the number, the more common it is. Let me explain why.</p>
+
+<p>At each depth upgrade, you can unlock 5 ores. For this example, lets say you have all 25 ores unlocked. The first thing the method does is add the weight of all the ores. This gives us a sum of 17025. The next step is generating a random number between 0 and 17025. This, in a way, already gives us the random selection. The next step is where it gets tricky. Starting from the rarest ore, it takes the weight of every ore and subtracts it from the randomly generated number(e.g. 17025-1-2-3-5-10-20 and so on and so forth). When a certain weight causes the the random number to drop to or below 0, it stops looping. The ore ID connected to that weight then gets returned by the function and 1 gets added to the player’s inventory of that certain ore ID. If the ore has not been found yet, it sets the isFound variable to 1, or a true in integer form.</p>
+
+<p>The reason we used this method to create the RRNG system is because it was one of 2 methods we found to implement RNG and this seemed much easier than the other method we found. It posed a challenge when trying to implement tables into this system, as changing up the equation to fit our code structure required some thought, but once the basics of tables were learned, it became a piece of cake.</p>
+
+<p>Now the error checking present in this function is at the very bottom, where it says return 0. 0 is dirt in our ore ID. Essentially, in case the RNG system failed(which in testing it did, but was fixed), it would show a piece of dirt but would not update the inventory or the isFound status. It was essentially a placeholder that would only be used if the RNG system failed.</p>
+
+<p>The next custom function I will show is one of our button. Each special button in our code(e.g. the shop button, inventory button, mine button, save button) ran a seperate function, and the button I will show you is the save button.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">saveButton</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button_height</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">imageMode</span><span class="o">(</span><span class="no">CORNER</span><span class="o">);</span>
+  <span class="n">image</span><span class="o">(</span><span class="n">saveButton</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">button_width</span><span class="o">,</span> <span class="n">button_height</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">checkObjectPressed</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">button_width</span><span class="o">,</span> <span class="n">button_height</span><span class="o">))</span> <span class="o">{</span>
+    <span class="n">playerSave</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This button is pretty simple, but the logic it gets triggered by and it triggers is a bit more complex. Initially, it takes 4 inputs. The x position of the button, the y position, the button width and the button height. With this, it loads the specific image file using the inputted coordinates then it runs a selection statement, checking for another function.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">boolean</span> <span class="nf">checkObjectPressed</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button_height</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">mouseX</span> <span class="o">&gt;=</span> <span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">mouseX</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">button_width</span> <span class="o">&amp;&amp;</span> <span class="n">mouseY</span> <span class="o">&gt;=</span> <span class="n">y</span> <span class="o">&amp;&amp;</span> <span class="n">mouseY</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">button_height</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span> <span class="mi">126</span><span class="o">);</span>
+    <span class="n">rectMode</span><span class="o">(</span><span class="no">CORNER</span><span class="o">);</span>
+    <span class="n">noStroke</span><span class="o">();</span>
+    <span class="n">rect</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">button_width</span><span class="o">,</span> <span class="n">button_height</span><span class="o">);</span>
+    <span class="n">noTint</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mousePressed</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This one takes the inputs of the previous statement and checks in the mouse is within the boundaries of those inputs. If it is, then a translucent rectangle is placed over it to create a highlight effect. After that, it checks if a mosue button is clicked. It the mouse click happens in the boundaries of the button, the function returns a true.</p>
+
+<p>Moving back to the save button, when a true is returned by the collision detection, it triggers the player save function.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">playerSave</span><span class="o">(){</span>
+  <span class="n">playerData</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="n">cash</span><span class="o">);</span>
+  <span class="n">playerData</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">mineSpeed</span><span class="o">);</span>
+  <span class="n">playerData</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">luckMultiplier</span><span class="o">);</span>
+  <span class="n">playerData</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="n">currentDepth</span><span class="o">);</span>
+  <span class="n">saveTable</span><span class="o">(</span><span class="n">oreInv</span><span class="o">,</span> <span class="s">"data/oreInv.csv"</span><span class="o">);</span>
+  <span class="n">saveTable</span><span class="o">(</span><span class="n">playerData</span><span class="o">,</span> <span class="s">"data/playerData.csv"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This was explained earlier, it uses the built-in table functions to take the player data variables and place them in the player data table, and then it saves both the ore inventory and the player data to the game files. The reason only player data must be placed in the table is because the ores, when mined, go straight to the table instead of staying as game variables, which disappear once the game ends. This took some time to figure out as trying to figure out why the player data was not automatically being place in the loaded table was a bit confusing. We were able to figure it out by just going over how we chanegd player data mid game.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Overall, this assignment was quite fun. Having the option to make whatever game we wanted made it a lot more enjoyable, but it also made it a great learning experience. Rayan and I were able to experiment with new things we have not tried in Processing, like using tables and had a great time doing it.</p>
+
+<p>In the future, I would like to polish this game up, by fixing loose ends in the code, making the visuals a bit more custom, and fleshing out more features. I think these 3 goals could be done with just a bit more time, but hopefully I am able to make a similar game, or better in the future.</p>
 
 
 
