@@ -24,7 +24,7 @@
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kaysan Merchant"},"dateModified":"2026-06-11T00:00:00+00:00","datePublished":"2026-06-11T00:00:00+00:00","description":"Overview","headline":"Intro to Computer Science Culminating Review","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2026/06/11/ICS-Culminating-Reflection/"},"url":"http://localhost:4000/2026/06/11/ICS-Culminating-Reflection/"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=337f2bcdeb6d226c26f17e3fa7b5f1949f1ded1c">
+    <link rel="stylesheet" href="/assets/css/style.css?v=50632977113e0ca8a61c3df8364c2814652e456a">
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
@@ -70,34 +70,98 @@
 
 <p>I will be going over variables &amp; data tracking, selection structures, repitition structures, arrays &amp; data structures and use of custom functions &amp; error checking.</p>
 
+<p><a href="/files/MomsBasement.zip" download="" style="display:inline-block;padding:0.75rem 1rem;background:#007acc;color:#fff;text-decoration:none;border-radius:4px;">
+  Download Mom’s Backyard
+</a></p>
+
 <h1 id="variables--data-tracking">Variables &amp; Data Tracking</h1>
 
-<p>To begin with, the variables used vary widely. The main variable types used are int, float and boolean, with some, but few strings. Of course, we include arrays of these types in various ways.</p>
+<p>To begin with, the variables used vary widely. The main variable types used are int, float and boolean, with some, but few strings. Of course, we include arrays of these types in various ways. Float variables were used in the RNG system(will be explained later) and strings were mainly used in arrays for image file switching and text displays in the inventory and shop. Boolean variables were usually only used for game state changes, like when the inventory is open, the shop is open, or the game starting. They were also used to begin processes like the ore animation.</p>
 
 <h2 id="integer-variables">Integer Variables</h2>
 
 <p>Integer variables are used the most. They are used for upgrade levels, player data, ore weights, ore IDs, and couple of more functions. Integers were used for ore IDs because it was easily callable to be used in oreAnimations, invetories and for selling. For player data, it was used to be easily altered and used in actual modifiers for the game(e.g. making mineSpeed make the ore animation go faster as seen below).</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">oreAnim</span><span class="p">){</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">pickY</span> <span class="o">&lt;=</span> <span class="mi">240</span><span class="p">){</span>
-        <span class="n">pickY</span> <span class="o">+=</span> <span class="mi">3</span><span class="p">;</span>
-        <span class="n">pickX</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">delay</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="n">mineSpeed</span><span class="p">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">oreAnim</span><span class="o">){</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">pickY</span> <span class="o">&lt;=</span> <span class="mi">240</span><span class="o">){</span>
+        <span class="n">pickY</span> <span class="o">+=</span> <span class="mi">3</span><span class="o">;</span>
+        <span class="n">pickX</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">delay</span><span class="o">(</span><span class="kt">int</span><span class="o">(</span><span class="mi">5</span><span class="o">/</span><span class="n">mineSpeed</span><span class="o">));</span>
         
-      <span class="p">}</span>
-      <span class="n">imageMode</span><span class="p">(</span><span class="n">CENTER</span><span class="p">);</span>
-      <span class="n">image</span><span class="p">(</span><span class="n">glow</span><span class="p">,</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">oreY</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">);</span>
-      <span class="n">image</span><span class="p">(</span><span class="n">oreImages</span><span class="p">[</span><span class="n">currentOreID</span><span class="p">],</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">oreY</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">);</span>
-      <span class="n">imageMode</span><span class="p">(</span><span class="n">CORNER</span><span class="p">);</span>
-      <span class="n">image</span><span class="p">(</span><span class="n">rock</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
-      <span class="n">oreY</span> <span class="o">-=</span> <span class="n">mineSpeed</span><span class="o">*</span><span class="mi">3</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">oreY</span> <span class="o">&lt;=</span> <span class="n">maxOreHeight</span><span class="p">)</span> <span class="p">{</span>
-          <span class="n">delay</span><span class="p">((</span><span class="nb">int</span><span class="p">)(</span><span class="mi">2000</span><span class="o">/</span><span class="n">mineSpeed</span><span class="p">));</span>
-          <span class="n">oreY</span> <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
-          <span class="n">pickY</span> <span class="o">=</span> <span class="mi">175</span><span class="p">;</span>
-          <span class="n">pickX</span> <span class="o">=</span> <span class="mi">145</span><span class="p">;</span>
-          <span class="n">oreAnim</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-      <span class="p">}</span>
+      <span class="o">}</span>
+      <span class="n">imageMode</span><span class="o">(</span><span class="no">CENTER</span><span class="o">);</span>
+      <span class="n">image</span><span class="o">(</span><span class="n">glow</span><span class="o">,</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">oreY</span><span class="o">,</span> <span class="mi">75</span><span class="o">,</span> <span class="mi">75</span><span class="o">);</span>
+      <span class="n">image</span><span class="o">(</span><span class="n">oreImages</span><span class="o">[</span><span class="n">currentOreID</span><span class="o">],</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">oreY</span><span class="o">,</span> <span class="mi">75</span><span class="o">,</span> <span class="mi">75</span><span class="o">);</span>
+      <span class="n">imageMode</span><span class="o">(</span><span class="no">CORNER</span><span class="o">);</span>
+      <span class="n">image</span><span class="o">(</span><span class="n">rock</span><span class="o">,</span> <span class="mi">250</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span>
+      <span class="n">oreY</span> <span class="o">-=</span> <span class="n">mineSpeed</span><span class="o">*</span><span class="mi">3</span><span class="o">;</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">oreY</span> <span class="o">&lt;=</span> <span class="n">maxOreHeight</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">delay</span><span class="o">((</span><span class="kt">int</span><span class="o">)(</span><span class="mi">2000</span><span class="o">/</span><span class="n">mineSpeed</span><span class="o">));</span>
+          <span class="n">oreY</span> <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+          <span class="n">pickY</span> <span class="o">=</span> <span class="mi">175</span><span class="o">;</span>
+          <span class="n">pickX</span> <span class="o">=</span> <span class="mi">145</span><span class="o">;</span>
+          <span class="n">oreAnim</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+      <span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="selection-structure">Selection Structure</h1>
+
+<p>Selection structures were used in the code in various ways. One of the many ways we use it is to check game states. Very simply, we use selection structures like if statements to check if the game has started, if an ore animation has started, if thew shop is open and if the inventory is open. Below is how our sraw function is structured to check for these.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">draw</span><span class="o">(){</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">){</span>
+    <span class="n">tint</span><span class="o">(</span><span class="n">depthUpgradeColors</span><span class="o">[</span><span class="n">currentDepth</span><span class="o">]);</span>
+    <span class="n">image</span><span class="o">(</span><span class="n">background</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">800</span><span class="o">,</span> <span class="mi">600</span><span class="o">);</span>
+    <span class="n">tint</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span>
+    <span class="n">startMenu</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">else</span><span class="o">{</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">inventoryOpen</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">shopOpen</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">gameMenu</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">inventoryOpen</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">drawInventory</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">shopOpen</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">drawShop</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">oreAnim</span><span class="o">){</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">pickY</span> <span class="o">&lt;=</span> <span class="mi">240</span><span class="o">){</span>
+        <span class="n">pickY</span> <span class="o">+=</span> <span class="mi">3</span><span class="o">;</span>
+        <span class="n">pickX</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">delay</span><span class="o">(</span><span class="kt">int</span><span class="o">(</span><span class="mi">5</span><span class="o">/</span><span class="n">mineSpeed</span><span class="o">));</span>
+        
+      <span class="o">}</span>
+      <span class="n">imageMode</span><span class="o">(</span><span class="no">CENTER</span><span class="o">);</span>
+      <span class="n">image</span><span class="o">(</span><span class="n">glow</span><span class="o">,</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">oreY</span><span class="o">,</span> <span class="mi">75</span><span class="o">,</span> <span class="mi">75</span><span class="o">);</span>
+      <span class="n">image</span><span class="o">(</span><span class="n">oreImages</span><span class="o">[</span><span class="n">currentOreID</span><span class="o">],</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">oreY</span><span class="o">,</span> <span class="mi">75</span><span class="o">,</span> <span class="mi">75</span><span class="o">);</span>
+      <span class="n">imageMode</span><span class="o">(</span><span class="no">CORNER</span><span class="o">);</span>
+      <span class="n">image</span><span class="o">(</span><span class="n">rock</span><span class="o">,</span> <span class="mi">250</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">200</span><span class="o">);</span>
+      <span class="n">oreY</span> <span class="o">-=</span> <span class="n">mineSpeed</span><span class="o">*</span><span class="mi">3</span><span class="o">;</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">oreY</span> <span class="o">&lt;=</span> <span class="n">maxOreHeight</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">delay</span><span class="o">((</span><span class="kt">int</span><span class="o">)(</span><span class="mi">2000</span><span class="o">/</span><span class="n">mineSpeed</span><span class="o">));</span>
+          <span class="n">oreY</span> <span class="o">=</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+          <span class="n">pickY</span> <span class="o">=</span> <span class="mi">175</span><span class="o">;</span>
+          <span class="n">pickX</span> <span class="o">=</span> <span class="mi">145</span><span class="o">;</span>
+          <span class="n">oreAnim</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Other examples of our selection structure usage if for conditional activations, like in out custom function, checkObjectPressed. In checkObjectPressed, we check if the mouse is within certain boundaries, and if it is, the object gets a white overlay on it. It also activates a process if clicked.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">boolean</span> <span class="nf">checkObjectPressed</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button_height</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">mouseX</span> <span class="o">&gt;=</span> <span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">mouseX</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">button_width</span> <span class="o">&amp;&amp;</span> <span class="n">mouseY</span> <span class="o">&gt;=</span> <span class="n">y</span> <span class="o">&amp;&amp;</span> <span class="n">mouseY</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">button_height</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span> <span class="mi">126</span><span class="o">);</span>
+    <span class="n">rectMode</span><span class="o">(</span><span class="no">CORNER</span><span class="o">);</span>
+    <span class="n">noStroke</span><span class="o">();</span>
+    <span class="n">rect</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">button_width</span><span class="o">,</span> <span class="n">button_height</span><span class="o">);</span>
+    <span class="n">noTint</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mousePressed</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
 
