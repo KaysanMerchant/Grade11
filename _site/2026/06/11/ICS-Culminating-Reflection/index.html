@@ -24,7 +24,7 @@
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kaysan Merchant"},"dateModified":"2026-06-11T00:00:00+00:00","datePublished":"2026-06-11T00:00:00+00:00","description":"Overview","headline":"Intro to Computer Science Culminating Review","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2026/06/11/ICS-Culminating-Reflection/"},"url":"http://localhost:4000/2026/06/11/ICS-Culminating-Reflection/"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=50632977113e0ca8a61c3df8364c2814652e456a">
+    <link rel="stylesheet" href="/assets/css/style.css?v=55262b42e343e95e18ad127e5535e96db060a9dd">
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
@@ -102,6 +102,7 @@
           <span class="n">pickX</span> <span class="o">=</span> <span class="mi">145</span><span class="o">;</span>
           <span class="n">oreAnim</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
       <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
 <h1 id="selection-structure">Selection Structure</h1>
@@ -109,20 +110,20 @@
 <p>Selection structures were used in the code in various ways. One of the many ways we use it is to check game states. Very simply, we use selection structures like if statements to check if the game has started, if an ore animation has started, if thew shop is open and if the inventory is open. Below is how our sraw function is structured to check for these.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">draw</span><span class="o">(){</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">){</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">){</span> <span class="c1">//if game not started(startmenu is true)</span>
     <span class="n">tint</span><span class="o">(</span><span class="n">depthUpgradeColors</span><span class="o">[</span><span class="n">currentDepth</span><span class="o">]);</span>
     <span class="n">image</span><span class="o">(</span><span class="n">background</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">800</span><span class="o">,</span> <span class="mi">600</span><span class="o">);</span>
     <span class="n">tint</span><span class="o">(</span><span class="mi">255</span><span class="o">);</span>
     <span class="n">startMenu</span><span class="o">();</span>
-  <span class="o">}</span> <span class="k">else</span><span class="o">{</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">inventoryOpen</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">shopOpen</span><span class="o">)</span> <span class="o">{</span>
+  <span class="o">}</span> <span class="k">else</span><span class="o">{</span> <span class="c1">// if game started</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">inventoryOpen</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">shopOpen</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// if both shop and inventory is closed</span>
       <span class="n">gameMenu</span><span class="o">();</span>
     <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">inventoryOpen</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">drawInventory</span><span class="o">();</span>
     <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">shopOpen</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">drawShop</span><span class="o">();</span>
     <span class="o">}</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">oreAnim</span><span class="o">){</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">oreAnim</span><span class="o">){</span> <span class="c1">// if ore animation is started</span>
       <span class="k">if</span> <span class="o">(</span><span class="n">pickY</span> <span class="o">&lt;=</span> <span class="mi">240</span><span class="o">){</span>
         <span class="n">pickY</span> <span class="o">+=</span> <span class="mi">3</span><span class="o">;</span>
         <span class="n">pickX</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
@@ -150,19 +151,89 @@
 <p>Other examples of our selection structure usage if for conditional activations, like in out custom function, checkObjectPressed. In checkObjectPressed, we check if the mouse is within certain boundaries, and if it is, the object gets a white overlay on it. It also activates a process if clicked.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">boolean</span> <span class="nf">checkObjectPressed</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button_width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">button_height</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">mouseX</span> <span class="o">&gt;=</span> <span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">mouseX</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">button_width</span> <span class="o">&amp;&amp;</span> <span class="n">mouseY</span> <span class="o">&gt;=</span> <span class="n">y</span> <span class="o">&amp;&amp;</span> <span class="n">mouseY</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">button_height</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">mouseX</span> <span class="o">&gt;=</span> <span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">mouseX</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">button_width</span> <span class="o">&amp;&amp;</span> <span class="n">mouseY</span> <span class="o">&gt;=</span> <span class="n">y</span> <span class="o">&amp;&amp;</span> <span class="n">mouseY</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">button_height</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//If in range</span>
     <span class="n">fill</span><span class="o">(</span><span class="mi">255</span><span class="o">,</span> <span class="mi">126</span><span class="o">);</span>
     <span class="n">rectMode</span><span class="o">(</span><span class="no">CORNER</span><span class="o">);</span>
     <span class="n">noStroke</span><span class="o">();</span>
     <span class="n">rect</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">button_width</span><span class="o">,</span> <span class="n">button_height</span><span class="o">);</span>
     <span class="n">noTint</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">mousePressed</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mousePressed</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//if clicked</span>
       <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
     <span class="o">}</span>
   <span class="o">}</span>
   <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
+
+<h1 id="repitition-structure">Repitition Structure</h1>
+
+<p>Loop are used very often in our code. One of the best implementations of our code using loops is when we loop through all the ores in the inventory. For each ore, we draw a slot for the inventory with its own space. Every 5 ores, it moves on to the next line. The loop here simply goes through each ore in our ore table.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">25</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">+(</span><span class="mi">560</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">+(</span><span class="mi">2</span><span class="o">*</span><span class="mi">560</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">+(</span><span class="mi">3</span><span class="o">*</span><span class="mi">560</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">drawInventoryOreSlot</span><span class="o">(</span><span class="mi">300</span><span class="o">+(</span><span class="n">i</span><span class="o">%</span><span class="mi">5</span><span class="o">)*(</span><span class="mi">480</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="mi">20</span><span class="o">+(</span><span class="mi">4</span><span class="o">*</span><span class="mi">560</span><span class="o">/</span><span class="mi">5</span><span class="o">),</span> <span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Another similar usage is the reset button. When resetting, each ore in the player’s ore inventory must be wiped, in a loop that goes through every row.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">if</span><span class="o">(</span><span class="n">checkObjectPressed</span><span class="o">(</span><span class="mi">300</span><span class="o">,</span> <span class="mi">462</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">75</span><span class="o">)){</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">oreInv</span><span class="o">.</span><span class="na">getRowCount</span><span class="o">()-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--){</span>
+      <span class="n">oreInv</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"quantity"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+      <span class="n">oreInv</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"isFound"</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="arrays--data-structure">Arrays &amp; Data Structure</h1>
+
+<p>Now here comes the good part. Arrays and data structures. In our code, arrays are used secondary to <strong>tables</strong>. Tables essentially act as 2d arrays where you can have columns and rows. Rows are given integer values while columns are given string names. The columns, in a pre-made table must be specified as header when loading the table, as seen below.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">oreTable</span> <span class="o">=</span> <span class="n">loadTable</span><span class="o">(</span><span class="s">"oreTable.csv"</span><span class="o">,</span> <span class="s">"header"</span><span class="o">);</span>
+<span class="n">oreInv</span> <span class="o">=</span> <span class="n">loadTable</span><span class="o">(</span><span class="s">"oreInv.csv"</span><span class="o">,</span> <span class="s">"header"</span><span class="o">);</span>
+<span class="n">playerData</span> <span class="o">=</span> <span class="n">loadTable</span><span class="o">(</span><span class="s">"playerData.csv"</span><span class="o">,</span> <span class="s">"header"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Our code only uses 3 total tables to store: every ore, the ores the player has, and all player data. To access or change any value in any of the tables, two commands can be used: <code class="language-plaintext highlighter-rouge">table.getInt(rowNum, column)</code> and <code class="language-plaintext highlighter-rouge">table.setInt(rowNum, column, value)</code>. Here they are in use:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">playerData</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="n">cash</span><span class="o">);</span>
+<span class="n">playerData</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">mineSpeed</span><span class="o">);</span>
+<span class="n">playerData</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">luckMultiplier</span><span class="o">);</span>
+<span class="n">playerData</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">"value"</span><span class="o">,</span> <span class="n">currentDepth</span><span class="o">);</span>
+<span class="n">saveTable</span><span class="o">(</span><span class="n">oreInv</span><span class="o">,</span> <span class="s">"data/oreInv.csv"</span><span class="o">);</span>
+<span class="n">saveTable</span><span class="o">(</span><span class="n">playerData</span><span class="o">,</span> <span class="s">"data/playerData.csv"</span><span class="o">);</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="n">currentDepth</span><span class="o">+</span><span class="mi">1</span><span class="o">)*</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--){</span>
+    <span class="n">weight</span> <span class="o">-=</span> <span class="n">oreTable</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"weight"</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">){</span>
+      <span class="n">oreInv</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"quantity"</span><span class="o">,</span> <span class="n">oreInv</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"quantity"</span><span class="o">)+</span><span class="mi">1</span><span class="o">);</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">oreInv</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"isFound"</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
+        <span class="n">oreInv</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">"isFound"</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+      <span class="o">}</span>
+      <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The first code snippet is from the player save function. It uses <code class="language-plaintext highlighter-rouge">table.setInt(rowNum, column, value)</code> to set the unsaved player data into the table values. It then saves the tables into the game data folder, making it a permanent save.</p>
+
+<p>The second code snippet utilizes the weight of ores in an RNG system to determine what ore you get when you mine. Every time a new ore is cycled through, it pulls its weight from the table using <code class="language-plaintext highlighter-rouge">table.getInt(rowNum, column)</code>. It subtracts that from a randomly generated weight and one the randomly generated weight is less than or equal to 0, it takes the ore ID of the ore whose weight was subtracted last and uses both <code class="language-plaintext highlighter-rouge">table.setInt(rowNum, column, value)</code> and <code class="language-plaintext highlighter-rouge">table.getInt(rowNum, column)</code> to increase the quantity of that ore in the player invetory by one. It will also check if the ore has been found, using 1 as true and 0 as false.</p>
+
+<p>There are other ways to use tables, like using a function to get or set a string or a float instead of an integer, but our uses only required integers.</p>
+
+<p>Arrays are also used in our code, for loading pickaxe images and choosing the pickaxe image needed at any point.</p>
+
+<h1 id="use-of-custom-function--error-checkingrestrictions">Use of Custom Function &amp; Error Checking/Restrictions</h1>
+
 
 
 

@@ -44,6 +44,7 @@ if (oreAnim){
           pickX = 145;
           oreAnim = false;
       }
+}
 ```
 
 # Selection Structure
@@ -52,20 +53,20 @@ Selection structures were used in the code in various ways. One of the many ways
 
 ```java
 void draw(){
-  if (start){
+  if (start){ //if game not started(startmenu is true)
     tint(depthUpgradeColors[currentDepth]);
     image(background, 0, 0, 800, 600);
     tint(255);
     startMenu();
-  } else{
-    if (!inventoryOpen && !shopOpen) {
+  } else{ // if game started
+    if (!inventoryOpen && !shopOpen) { // if both shop and inventory is closed
       gameMenu();
     } else if (inventoryOpen) {
       drawInventory();
     } else if (shopOpen) {
       drawShop();
     }
-    if (oreAnim){
+    if (oreAnim){ // if ore animation is started
       if (pickY <= 240){
         pickY += 3;
         pickX += 1;
@@ -94,16 +95,91 @@ Other examples of our selection structure usage if for conditional activations, 
 
 ```java
 boolean checkObjectPressed(int x, int y, int button_width, int button_height) {
-  if (mouseX >= x && mouseX <= x + button_width && mouseY >= y && mouseY <= y + button_height) {
+  if (mouseX >= x && mouseX <= x + button_width && mouseY >= y && mouseY <= y + button_height) { //If in range
     fill(255, 126);
     rectMode(CORNER);
     noStroke();
     rect(x, y, button_width, button_height);
     noTint();
-    if (mousePressed) {
+    if (mousePressed) { //if clicked
       return true;
     }
   }
   return false;
 }
 ```
+
+# Repitition Structure
+
+Loop are used very often in our code. One of the best implementations of our code using loops is when we loop through all the ores in the inventory. For each ore, we draw a slot for the inventory with its own space. Every 5 ores, it moves on to the next line. The loop here simply goes through each ore in our ore table.
+
+```java
+for (int i = 0; i<25; i++) {
+    if (i < 5) {
+      drawInventoryOreSlot(300+(i%5)*(480/5), 20, i);
+    } else if (i < 10) {
+      drawInventoryOreSlot(300+(i%5)*(480/5), 20+(560/5), i);
+    } else if (i < 15) {
+      drawInventoryOreSlot(300+(i%5)*(480/5), 20+(2*560/5), i);
+    } else if (i < 20) {
+      drawInventoryOreSlot(300+(i%5)*(480/5), 20+(3*560/5), i);
+    } else if (i < 25) {
+      drawInventoryOreSlot(300+(i%5)*(480/5), 20+(4*560/5), i);
+    }
+}
+```
+
+Another similar usage is the reset button. When resetting, each ore in the player's ore inventory must be wiped, in a loop that goes through every row.
+
+```java
+ if(checkObjectPressed(300, 462, 200, 75)){
+    for(int i = oreInv.getRowCount()-1; i >= 0; i--){
+      oreInv.setInt(i, "quantity", 0);
+      oreInv.setInt(i, "isFound", 0);
+    }
+ }
+ ```
+
+# Arrays & Data Structure
+
+Now here comes the good part. Arrays and data structures. In our code, arrays are used secondary to **tables**. Tables essentially act as 2d arrays where you can have columns and rows. Rows are given integer values while columns are given string names. The columns, in a pre-made table must be specified as header when loading the table, as seen below.
+
+```java
+oreTable = loadTable("oreTable.csv", "header");
+oreInv = loadTable("oreInv.csv", "header");
+playerData = loadTable("playerData.csv", "header");
+```
+
+Our code only uses 3 total tables to store: every ore, the ores the player has, and all player data. To access or change any value in any of the tables, two commands can be used: ```table.getInt(rowNum, column)``` and ```table.setInt(rowNum, column, value)```. Here they are in use:
+
+```java
+playerData.setInt(0, "value", cash);
+playerData.setInt(1, "value", (int)mineSpeed);
+playerData.setInt(2, "value", (int)luckMultiplier);
+playerData.setInt(3, "value", currentDepth);
+saveTable(oreInv, "data/oreInv.csv");
+saveTable(playerData, "data/playerData.csv");
+```
+```java
+for(int i = (currentDepth+1)*5-1; i >= 0; i--){
+    weight -= oreTable.getInt(i, "weight");
+    if (weight <= 0){
+      oreInv.setInt(i, "quantity", oreInv.getInt(i, "quantity")+1);
+      if (oreInv.getInt(i, "isFound") == 0){
+        oreInv.setInt(i, "isFound", 1);
+      }
+      return i;
+    }
+}
+```
+
+The first code snippet is from the player save function. It uses ```table.setInt(rowNum, column, value)``` to set the unsaved player data into the table values. It then saves the tables into the game data folder, making it a permanent save.
+
+The second code snippet utilizes the weight of ores in an RNG system to determine what ore you get when you mine. Every time a new ore is cycled through, it pulls its weight from the table using ```table.getInt(rowNum, column)```. It subtracts that from a randomly generated weight and one the randomly generated weight is less than or equal to 0, it takes the ore ID of the ore whose weight was subtracted last and uses both ```table.setInt(rowNum, column, value)``` and ```table.getInt(rowNum, column)``` to increase the quantity of that ore in the player invetory by one. It will also check if the ore has been found, using 1 as true and 0 as false.
+
+There are other ways to use tables, like using a function to get or set a string or a float instead of an integer, but our uses only required integers.
+
+Arrays are also used in our code, for loading pickaxe images and choosing the pickaxe image needed at any point.
+
+# Use of Custom Function & Error Checking/Restrictions
+
